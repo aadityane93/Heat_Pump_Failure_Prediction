@@ -1,4 +1,6 @@
 __pycache__
+venv
+.venv
 heapo_data
 artifacts
 heapo_data.zip

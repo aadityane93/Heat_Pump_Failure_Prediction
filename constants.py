@@ -150,8 +150,8 @@ FEATURE_DESCRIPTIONS = {
 # Look
 # --------------------------------------------------------------------------
 
-PALETTE = ["#1F6F63", "#D9822B", "#4C5B69", "#8E5572", "#7A9E5C", "#B5563F"]
-POSITIVE_COLOR = "#B5563F"  # fault
-NEGATIVE_COLOR = "#1F6F63"  # no fault
+PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
+POSITIVE_COLOR = "#e34948"  # fault
+NEGATIVE_COLOR = "#2a78d6"  # no fault
 
 ARTIFACT_STEMS = ["dataset", "households", "protocols", "smd_overview", "daily"]

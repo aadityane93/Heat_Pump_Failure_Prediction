@@ -154,7 +154,7 @@ def page_overview(daily, labels, households, protocols, overview):
     a_weather = fig.add_subplot(2, 1, 2)
 
     g = households["Group"].value_counts()
-    b = a_group.bar(g.index, g.values, color=["tab:blue", "tab:orange"])
+    b = a_group.bar(g.index, g.values, color=["#2a78d6", "#eb6834"])
     label_bars(a_group, b)
     a_group.set_title("Households by group")
     a_group.set_ylabel("households")
@@ -169,13 +169,13 @@ def page_overview(daily, labels, households, protocols, overview):
         "Installation_HasPVSystem",
     ]
     flags = [c for c in flags if c in households.columns]
-    b = a_flags.barh(flags, [n_true(households[c]) for c in flags], color="tab:green")
+    b = a_flags.barh(flags, [n_true(households[c]) for c in flags], color="#1baf7a")
     label_bars(a_flags, b)
     a_flags.set_title(f"Flag = True (of {len(households)} households)")
     a_flags.invert_yaxis()
 
     w = households["Weather_ID"].value_counts()
-    b = a_weather.bar(w.index.astype(str), w.values, color="tab:purple")
+    b = a_weather.bar(w.index.astype(str), w.values, color="#4a3aa7")
     label_bars(a_weather, b)
     a_weather.set_title("Households per weather station")
     a_weather.tick_params(axis="x", rotation=45)
@@ -189,18 +189,18 @@ def page_overview(daily, labels, households, protocols, overview):
     fig, ax = plt.subplots(1, 3, figsize=(15, 4.5))
 
     y = protocols["Visit_Year"].value_counts().sort_index()
-    b = ax[0].bar(y.index.astype(int).astype(str), y.values, color="tab:blue")
+    b = ax[0].bar(y.index.astype(int).astype(str), y.values, color="#2a78d6")
     label_bars(ax[0], b)
     ax[0].set_title("Visits per year")
 
     v = protocols["Household_ID"].value_counts().value_counts().sort_index()
-    b = ax[1].bar(v.index.astype(str), v.values, color="tab:orange")
+    b = ax[1].bar(v.index.astype(str), v.values, color="#eb6834")
     label_bars(ax[1], b)
     ax[1].set_title("Visits per household")
     ax[1].set_xlabel("number of visits")
 
     t = protocols["HeatPump_Installation_Type"].value_counts(dropna=False)
-    b = ax[2].bar(t.index.astype(str), t.values, color="tab:green")
+    b = ax[2].bar(t.index.astype(str), t.values, color="#1baf7a")
     label_bars(ax[2], b)
     ax[2].set_title("Heat pump type")
     ax[2].tick_params(axis="x", rotation=20)
@@ -213,12 +213,12 @@ def page_overview(daily, labels, households, protocols, overview):
     st.caption("How many days of readings each household has, split around its visit date.")
     fig, ax = plt.subplots(1, 2, figsize=(9, 4))
 
-    ax[0].hist(overview["SMD_daily_TimeAvailable_NumberDays"].dropna(), bins=40, color="tab:blue")
+    ax[0].hist(overview["SMD_daily_TimeAvailable_NumberDays"].dropna(), bins=40, color="#2a78d6")
     ax[0].set_title("Days of daily data")
     ax[0].set_xlabel("days")
 
     d = overview["SMD_daily_TimeAvailable_DaysBeforeVisit"].dropna()
-    ax[1].hist(d, bins=40, color="tab:orange")
+    ax[1].hist(d, bins=40, color="#eb6834")
     ax[1].axvline(180, color="red", ls="--", lw=1.2, label="180 days")
     ax[1].set_title(f"Days before visit  (n={len(d)})")
     ax[1].set_xlabel("days")
@@ -238,7 +238,7 @@ def page_overview(daily, labels, households, protocols, overview):
     a2 = fig.add_subplot(1, 3, (2, 3))
 
     hp = overview["SMD_daily_MeasurementsAvailable_HeatPump"].value_counts(dropna=False)
-    b = a1.bar(hp.index.astype(str), hp.values, color=["tab:red", "tab:green"])
+    b = a1.bar(hp.index.astype(str), hp.values, color=["#eb6834", "#2a78d6"])
     label_bars(a1, b)
     a1.set_title("Separate heat pump channel")
 
@@ -251,7 +251,7 @@ def page_overview(daily, labels, households, protocols, overview):
     ).dt.tz_localize(None)
     tl = tl.sort_values("start").reset_index(drop=True)
 
-    cmap = {"treatment": "tab:orange", "control": "tab:blue"}
+    cmap = {"treatment": "#eb6834", "control": "#2a78d6"}
     a2.hlines(
         tl.index, tl["start"], tl["end"],
         colors=tl["Group"].map(cmap).fillna("grey"), linewidth=0.6,
@@ -280,7 +280,7 @@ def page_overview(daily, labels, households, protocols, overview):
     counts = [len(s1), len(s2), len(s3), len(s4), len(s5)]
 
     fig, ax = plt.subplots(figsize=(9, 3.6))
-    b = ax.barh(steps[::-1], counts[::-1], color="tab:blue")
+    b = ax.barh(steps[::-1], counts[::-1], color="#2a78d6")
     ax.bar_label(b, padding=3, fontsize=9)
     ax.set_xlim(0, max(counts) * 1.15)
     ax.set_xlabel("households")
